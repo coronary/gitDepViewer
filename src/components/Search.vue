@@ -5,15 +5,16 @@
         <ul>
             <h3 v-if="deps">Dependencies</h3>
             <h3 v-else>No Dependencies</h3>
-            <li v-for="(ver, name) in deps" v-bind:key=name>{{ name }}: {{ ver}}</li>
+            <li v-for="(ver, name) in deps" v-bind:key=name><a v-bind:href=npm+name>  {{ name }}: {{ ver}}</a></li>
             <h3 v-if="devdeps">Dev Dependencies</h3>
             <h3 v-else>No Dev Dependencies</h3>
-            <li v-for="(ver, name) in devdeps" v-bind:key=name>{{ name }}: {{ ver}}</li>
+            <li v-for="(ver, name) in devdeps" v-bind:key=name><a v-bind:href=npm+name>{{ name }}: {{ ver}}</a></li>
         </ul>
     </div>
 </template>
 
 <script>
+
 export default {
     name: 'Search',
     data () {
@@ -28,17 +29,11 @@ export default {
     },
     methods: {
         search: function () {
-            console.log('requesting')
-            this.deps = null
-            this.devdeps = null
-                fetch(this.packUrl)
-                    .then(res => res.json())
-                .then(body =>{
-                    this.deps = body.dependencies
-                    this.devdeps = body.devDependencies
-                })
-                .catch(() => console.log('invalid url'))
-            },
+            fetch(this.packUrl)
+                .then(res => res.json())
+            .then(body => [this.deps, this.devdeps] = [body.dependencies, body.devDependencies])
+        .catch(() => console.log('invalid url'))
+        },
         isUrl: function (url) {
             if(url.includes('github.com')) {
                 return true
