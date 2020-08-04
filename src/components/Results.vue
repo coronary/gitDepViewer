@@ -3,7 +3,7 @@
         <ul>
             <h3 v-if='listings'>{{ title }}</h3>
             <!--<h3 v-else>No Dependencies</h3>-->
-            <li v-for="(ver, name) in listings" v-bind:key=name><a v-bind:href=npm+name target="_blank">  {{ name }}: {{ ver}}</a></li>
+            <p v-for="(ver, name) in listings" v-bind:key=name><a v-bind:href=npm+name target="_blank">{{ name }}</a></p>
         </ul>
     </div>
 </template>
@@ -21,7 +21,12 @@ export default {
         listings: Object,
         title: String
     },
-    methods: { },
+    methods: {
+        getNpm: function (event) {
+            let url = event.target.attributes.href.nodeValue
+            return fetch(url).then(res => res.text()).then(body => console.log(body))
+        }
+    },
 }
 
 </script>
