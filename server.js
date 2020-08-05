@@ -10,14 +10,26 @@ const port = 8000
 
 const requestListener = function (req, res) {
     res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+
     const queryObj = url.parse(req.url,true).query
     const packName = queryObj.packName
+
     if(packName){
+        console.log(`Request for ${packName}`)
         fetch(`https://npmjs.com/package/${packName}`)
           .then(response => response.text())
             .then(body => {
                 const $ = cheerio.load(body)
                 const packTitle = $('#readme').children().first().text()
+
+                let toSend
+                if(packTitle) {
+                    toSend = packTitle
+                }else {
+                    toSend = 'No title found'
+                }
+
                 res.writeHead(200)
                 res.end(JSON.stringify({title:packTitle}))
             })
