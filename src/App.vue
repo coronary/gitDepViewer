@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <img alt="Developer" class='header-img' src="./assets/dev.svg">
+    <h1>TITLE</h1>
     <Search></Search>
   </div>
 </template>
@@ -29,7 +29,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin: 60px 60px 60px;
 }
 </style>

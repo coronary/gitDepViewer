@@ -1,11 +1,11 @@
 <template>
-    <div id="results">
-        <ul>
-            <h3 v-if='listings'>{{ title }}</h3>
-            <!--<h3 v-else>No Dependencies</h3>-->
-            <!--<p v-for="(ver, name) in listings" v-bind:key=name><a v-bind:href=npm+name target="_blank">{{ name }}</a></p>-->
-            <p v-for="(ver, name) in listings" v-bind:key=name><span v-bind:href=npm+name v-bind:packName=name target="_blank" v-on:click="getNpm">{{ name }}</span></p>
-        </ul>
+    <div>
+        <h3>{{ title }}</h3>
+        <div id="results">
+            <div class="packtitle" v-for="(ver, name) in listings" v-bind:key=name>
+                <span v-bind:href=npm+name v-bind:packName=name target="_blank" v-on:click="getNpm">{{ name }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -35,6 +35,19 @@ export default {
 </script>
 
 <style>
+#results {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.packtitle {
+    margin: 5px;
+    min-height: 150px;
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 </style>
