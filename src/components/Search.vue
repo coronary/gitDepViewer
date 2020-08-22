@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style>
+input[type=text] {
+    width: 60vw;
+    height: 4vh;
+}
 
 
 </style>

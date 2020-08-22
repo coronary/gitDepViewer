@@ -2,7 +2,7 @@
     <div>
         <h3>{{ title }}</h3>
         <div id="results">
-            <div class="packtitle" v-for="(ver, name) in listings" v-bind:key=name>
+            <div class="pack" v-for="(ver, name) in listings" v-bind:key=name>
                 <span v-bind:href=npm+name v-bind:packName=name target="_blank" v-on:click="getNpm">{{ name }}</span>
             </div>
         </div>
@@ -40,13 +40,16 @@ export default {
     flex-wrap: wrap;
 }
 
-.packtitle {
+.pack {
     margin: 5px;
     min-height: 150px;
     min-width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #2c3e50;
+    border: medium solid #2c3e50;
+    padding: 5px;
 }
 
 

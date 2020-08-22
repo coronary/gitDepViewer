@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <h1>TITLE</h1>
+    <h1>DEPENDENCY VIEWER</h1>
     <Search></Search>
   </div>
 </template>
