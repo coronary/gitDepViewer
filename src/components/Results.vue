@@ -41,6 +41,9 @@ export default {
     justify-content: center;
 }
 
+a {
+    color: inherit;
+}
 .pack {
     margin: 5px;
     height: 150px;
@@ -49,8 +52,11 @@ export default {
     justify-content: center;
     align-items: center;
     color: #2c3e50;
-    
     padding: 5px;
+    transition-duration: 0.5s;
+}
+.pack:hover{
+    box-shadow: 2px 2px 4px grey;
 }
 
 .test {

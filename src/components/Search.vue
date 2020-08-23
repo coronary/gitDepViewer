@@ -30,7 +30,8 @@ export default {
         .catch(() => console.log('invalid url'))
         },
         isUrl: function (url) {
-            if(url.includes('github.com')) {
+            let re = /github.com\/.+\/.+/
+            if(re.test(url)) {
                 return true
             }else {
                 return false
