@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--<img alt="Vue logo" src="./assets/logo.png">-->
     <h1>DEPENDENCY VIEWER</h1>
     <Search></Search>
   </div>
@@ -12,17 +11,12 @@ import Search from './components/Search.vue'
 export default {
   name: 'App',
   components: {
-    //HelloWorld
       Search
   }
 }
 </script>
 
 <style>
-.header-img {
-    /*height: 10vh;*/
-    width: 50vw;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
