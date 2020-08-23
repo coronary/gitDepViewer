@@ -1,7 +1,7 @@
 <template>
     <div id="search">
-        <input v-on:keyup.enter="search" v-model="searchTerm" type="text" placeholder="paste in git url">
-        <h2 v-if="isUrl(packName)">Dependencies for {{ packName }}</h2>
+        <input v-on:keyup.enter="search" v-model="searchTerm" type="text" placeholder="GIT URL">
+        <h2 v-if="packName">Dependencies for {{ packName }}</h2>
         <results v-bind:listings=deps title='Dependencies'></results>
         <results v-bind:listings=devdeps title='Dev Dependencies'></results>
     </div>
@@ -65,6 +65,8 @@ export default {
 input[type=text] {
     width: 60vw;
     height: 4vh;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 
