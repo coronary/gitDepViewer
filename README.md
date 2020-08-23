@@ -1,5 +1,9 @@
 # gitDepViewer
 
+## Deployed at
+
+https://friendly-lovelace-740d16.netlify.app/
+
 Repository for initial Vue project. Meant to be a tool to view and browse the dependencies for any javascript project hosted on github by fetching the package.json
 
 ## Project setup
