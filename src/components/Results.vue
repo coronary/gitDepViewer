@@ -2,9 +2,7 @@
     <div class="test">
         <h3>{{ title }}</h3>
         <div id="results">
-            <div class="pack" v-for="(ver, name) in listings" v-bind:key=name>
-                <a v-bind:href=npm+name v-bind:packName=name target="_blank" v-on:click="getNpm">{{ name }}</a>
-            </div>
+                <a class="pack" v-for="(ver, name) in listings" v-bind:key=name v-bind:href=npm+name v-bind:packName=name target="_blank">{{ name }}</a>
         </div>
     </div>
 </template>
@@ -21,14 +19,6 @@ export default {
     props: {
         listings: Object,
         title: String
-    },
-    methods: {
-        getNpm: function (event) {
-            let url = event.target.attributes.packName.value
-            return fetch(`http://localhost:8000?packName=${url}`)
-                    .then(res => res.json())
-                    .then(json => console.log(json))
-        }
     },
 }
 
