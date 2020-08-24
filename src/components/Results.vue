@@ -34,23 +34,37 @@ export default {
 a {
     color: inherit;
 }
+
 .pack {
     margin: 5px;
-    height: 150px;
-    width: 150px;
+    height: 50px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #2c3e50;
-    padding: 5px;
-    transition-duration: 0.5s;
-}
-.pack:hover{
-    box-shadow: 2px 2px 4px grey;
 }
 
 .test {
     border: thick solid #2c3e50;
     margin-bottom: 2px;
 }
+
+@media only screen and (min-width: 300px) {
+    .pack:hover{
+        box-shadow: 2px 2px 4px grey;
+    }
+    .pack {
+        margin: 5px;
+        height: 105px;
+        width: 105px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #2c3e50;
+        padding: 5px;
+        transition-duration: 0.5s;
+    }
+}
+
 </style>
