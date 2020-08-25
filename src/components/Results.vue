@@ -1,11 +1,14 @@
 <template>
     <div class="results">
-        <div class="title" v-on:click="collapse">
-            <h3>{{title}}</h3>
+        <div class="title" v-on:click="isActive = !isActive">
+            <h3>{{title}}:</h3>
+            <h3>{{packNum}}</h3>
         </div>
-        <div id="results" v-bind:style='{"max-height": (isActive? "":"0")}'>
-                <a class="pack" v-for="(ver, name) in listings" v-bind:key=name v-bind:href=npm+name v-bind:packName=name target="_blank">{{ name }}</a>
-        </div>
+        <transition name="smooth">
+            <div id="results" v-show="isActive">
+                    <a class="pack" v-for="(ver, name) in listings" v-bind:key=name v-bind:href=npm+name v-bind:packName=name target="_blank">{{ name }}</a>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -24,6 +27,11 @@ export default {
             this.isActive = !this.isActive
         }
     },
+    computed : {
+        packNum: function () {
+            return Object.keys(this.listings).length
+        },
+    },
     props: {
         listings: Object,
         title: String
@@ -33,6 +41,15 @@ export default {
 </script>
 
 <style>
+
+.smooth-enter-active, .smooth-leave-active {
+  transition: all .3s ease;
+}
+.smooth-enter, .smooth-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
 .title > h3 {
     margin-right: 5px;
 }

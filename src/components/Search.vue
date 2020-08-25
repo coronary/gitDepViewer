@@ -1,9 +1,10 @@
 <template>
     <div id="search">
         <input v-on:keyup.enter="search" v-model="searchTerm" type="text" placeholder="GIT URL">
-        <h2 v-if="packName">Dependencies for {{ packName }}</h2>
-        <results v-bind:listings=deps title='Dependencies'></results>
-        <results v-bind:listings=devdeps title='Dev Dependencies'></results>
+        <button v-if="deps || devdeps" id="clear" type="button" v-on:click="clear">Clear</button>
+        <h2 v-if="deps || devdeps">Dependencies for {{ packName }}</h2>
+        <results v-if="deps" v-bind:listings=deps title='Dependencies'></results>
+        <results v-if="devdeps" v-bind:listings=devdeps title='Dev Dependencies'></results>
     </div>
 </template>
 
@@ -23,11 +24,19 @@ export default {
         }
     },
     methods: {
+        clear: function () {
+            this.deps = null
+            this.devdeps = null
+            this.searchTerm = ''
+        },
         search: function () {
             fetch(this.packUrl)
                 .then(res => res.json())
             .then(body => [this.deps, this.devdeps] = [body.dependencies, body.devDependencies])
-        .catch(() => console.log('invalid url'))
+                .catch(() => {
+                    alert('Invalid url or no package.json')
+                    console.log('invalid url')
+                })
         },
         isUrl: function (url) {
             let re = /github.com\/.+\/.+/
@@ -68,6 +77,10 @@ input[type=text] {
     height: 4vh;
     text-align: center;
     margin-bottom: 20px;
+}
+#clear {
+    margin-left: 3px;
+    height: 4vh;
 }
 
 
