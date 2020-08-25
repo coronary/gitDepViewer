@@ -1,8 +1,8 @@
 <template>
     <div id="search">
-        <input v-on:keyup.enter="search" v-model="searchTerm" type="text" placeholder="GIT URL">
+        <input v-on:keyup.enter="search" v-model="searchTerm" type="text" placeholder="GIT URL OR USER/PACKAGE">
         <button v-if="deps || devdeps" id="clear" type="button" v-on:click="clear">Clear</button>
-        <h2 v-if="deps || devdeps">Dependencies for {{ packName }}</h2>
+        <h2 v-if="deps && devdeps && searchTerm">Dependencies for {{ packName }}</h2>
         <results v-if="deps" v-bind:listings=deps title='Dependencies'></results>
         <results v-if="devdeps" v-bind:listings=devdeps title='Dev Dependencies'></results>
     </div>
@@ -36,10 +36,19 @@ export default {
                 .catch(() => {
                     alert('Invalid url or no package.json')
                     console.log('invalid url')
+                    this.clear()
                 })
         },
         isUrl: function (url) {
             let re = /github.com\/.+\/.+/
+            if(re.test(url)) {
+                return true
+            }else {
+                return false
+            }
+        },
+        isSlash: function (url) {
+            let re = /.+\/.+/
             if(re.test(url)) {
                 return true
             }else {
@@ -54,12 +63,14 @@ export default {
             if(this.isUrl(this.searchTerm)){
                 let splitted = this.searchTerm.split('github.com')
                 return rawUrl + splitted[splitted.length - 1] + packUrlPartial
+            }else if (this.isSlash(this.searchTerm)){
+                return rawUrl + '/' + this.searchTerm +  packUrlPartial
             }else {
                 return ''
             }
         },
         packName: function () {
-            if(this.isUrl(this.searchTerm)){
+            if(this.isUrl(this.searchTerm) || this.isSlash(this.searchTerm)){
                 let splitted = this.searchTerm.split('/')
                 return splitted[splitted.length - 1]
             }else {
